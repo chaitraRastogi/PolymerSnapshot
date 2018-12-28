@@ -1,0 +1,32 @@
+{
+  "name": "polymerApp",
+  "authors": [
+    "Chaitra <chaitrabhat94@gmail.com>"
+  ],
+  "description": "sample chart app",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^3.1.0",
+    "px-vis-xy-chart": "^4.0.1",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^3.0.1",
+    "paper-item": "PolymerElements/paper-item#^3.0.1",
+    "paper-listbox": "PolymerElements/paper-listbox#^3.0.1",
+    "px-vis": "^5.1.12",
+    "px-data-table": "^6.1.4"
+  },
+  "resolutions": {
+    "polymer": "^1.7.0",
+    "webcomponentsjs": "^0.7.24",
+    "px-dropdown": "4.3.4",
+	"app-localize-behavior": "^0.10.2"
+  }
+}

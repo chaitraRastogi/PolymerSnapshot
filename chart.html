@@ -1,0 +1,113 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/px-dropdown/px-dropdown.html">
+<link rel="import" href="/bower_components/px-data-table/px-data-table.html">
+<link rel="import" href="/bower_components/px-data-table/px-data-table-highlight.html">
+<dom-module id="px-chart-demo">
+   <template>
+      <style>
+         :host {
+         font-family: sans-serif;
+         };
+         .row-selector{
+         --px-data-table-header-background-color:#66CCCC;
+         }
+      </style>
+      <h3>PX DATA TABLE</h3>
+      <px-dropdown
+         items='{{dropdownData}}'
+         sort-mode="value"
+         button-style="default"
+         display-value="Select"
+         disable-clear
+         trigger-height="30" 
+         selected = '{{dropdownData.val}}' 
+         on-click = "capture"></px-dropdown>
+      <br/>
+      <br/>
+      <div id="capture">
+         <px-data-table 
+            table-data='{{tableData1}}'
+            language="en" class="row-selector" tableColumns hide-pagination-control >
+            <px-data-table-column
+               name='first'
+               sortable
+               filterable>
+            </px-data-table-column>
+            <px-data-table-column
+               name='last'
+               sortable
+               filterable></px-data-table-column>
+            <px-data-table-column
+               name='email'
+               sortable
+               filterable></px-data-table-column>
+            <px-data-table-column
+               name='icons'
+               type="html"
+               sortable
+               filterable></px-data-table-column>
+         </px-data-table>
+      </div>
+   </template>
+   <script>
+      Polymer({
+        is: "px-chart-demo",	 
+      capture(){
+      
+      var dropdownValue  = this.dropdownData.val
+      html2canvas(this.$$('#capture'), {
+          onrendered: function(canvas) {
+              // canvas is the final rendered <canvas> element
+      
+      if(dropdownValue == 1){
+      const filename  = 'chart.pdf';
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 1,0);
+      pdf.save(filename);
+      console.log(pdf.output('datauri'))
+      }
+      else if(dropdownValue == 2){
+      let image = canvas.toDataURL('image/png',1,0);
+      var aTag = document.createElement('a');
+      aTag.setAttribute('download',"image");
+      aTag.href = image;
+      aTag.click();
+      
+      }
+          }
+      });
+      
+      },
+      
+         properties: {
+    
+      dropdownData:{
+      type:Array,
+      value:function(){
+      return [
+      {"key":"1","val":"Save as PDF"},{"key":"2","val":"Save as Image"}
+      ]
+      }
+      
+      },tableData1: {
+      type: Array,
+      value: function() {
+        return [
+      	{"first":"Valentine","last":"Meyer","email":
+      "valentinemeyer@scentric.com"},
+      	{"first":"Silva","last":"Alexander","email":
+      "silvaalexander@gmail.com"},
+      	{"first":"Hopkins","last":"Wong","email":"hopkinswong@hotmail.com"
+      },
+      	{"first": "Joe","last": "Sherman","email": "joejoe@yahoo.com"},
+      	{"first": "Jane","last": "Bartlett","email": "jane@scentric.com"}
+        ];
+      }
+       }
+      
+      }
+      
+      
+      });
+   </script>
+</dom-module>
